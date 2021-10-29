@@ -35,7 +35,7 @@ public class RentalOrder {
     @Column(name = "totalPrice")
     private BigDecimal totalPrice;
 
-    public enum Status {
-        NEW, IN_PROGRESS, DONE;
-    }
+    @Column
+    @Enumerated(EnumType.ORDINAL)
+    private Enum status;
 }

@@ -17,7 +17,7 @@ public class Car {
     @Column(name = "pricePerDay")
     private BigDecimal pricePerDay;
 
-    public enum Color {
-        BLACK, WHITE, GREY, RED, GREEN, BLUE, YELLOW, ORANGE;
-    }
+    @Column
+    @Enumerated(EnumType.ORDINAL)
+    private Enum color;
 }
