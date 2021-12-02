@@ -12,31 +12,31 @@ public class RentalOrderServiceController {
     @Autowired
     private RentalOrderService rentalOrderService;
 
-    @RequestMapping(value = "/orders")
-    public ResponseEntity<Object> getOrders() {
-        return new ResponseEntity<>(rentalOrderService.findAll(), HttpStatus.OK);
+    @GetMapping("/orders")
+    public ResponseEntity<RentalOrder> getOrders() {
+        return new ResponseEntity(rentalOrderService.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getOrder(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(rentalOrderService.findById(id), HttpStatus.OK);
+    @GetMapping("/order/{id}")
+    public ResponseEntity getOrder(@PathVariable("id") Long id) {
+        return new ResponseEntity(rentalOrderService.findById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/orders", method = RequestMethod.POST)
-    public ResponseEntity<Object> addOrder(@RequestBody RentalOrder order) {
+    @PostMapping("/order")
+    public ResponseEntity<RentalOrder> addOrder(@RequestBody RentalOrder order) {
         rentalOrderService.save(order);
-        return new ResponseEntity<>("Rental order added successfully!", HttpStatus.OK);
+        return new ResponseEntity("Rental order added successfully!", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/orders/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateOrder(@PathVariable("id") Long id, @RequestBody RentalOrder order) {
-        rentalOrderService.update(id, order);
-        return new ResponseEntity<>("Rental order updated successfully!", HttpStatus.OK);
+    @PutMapping("/order")
+    public ResponseEntity updateOrder(@RequestBody RentalOrder order) {
+        rentalOrderService.update(order);
+        return new ResponseEntity("Rental order updated successfully!", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/orders/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteOder(@PathVariable("id") Long id) {
+    @DeleteMapping("/order/{id}")
+    public ResponseEntity deleteOder(@PathVariable("id") Long id) {
         rentalOrderService.remove(id);
-        return new ResponseEntity<>("Rental order deleted successfully!", HttpStatus.OK);
+        return new ResponseEntity("Rental order deleted successfully!", HttpStatus.OK);
     }
 }

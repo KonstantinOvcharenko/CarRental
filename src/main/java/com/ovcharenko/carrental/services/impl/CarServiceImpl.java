@@ -15,8 +15,9 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
 
     @Override
-    public Optional<Car> findById(Long id) {
-        return carRepository.findById(id);
+    public Car findById(Long id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        return optionalCar.isPresent() ? optionalCar.get() : new Car();
     }
 
     @Override
@@ -25,21 +26,14 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void save(Car car) {
+    public Car save(Car car) {
         carRepository.save(car);
-
+        return car;
     }
 
     @Override
-    public void update(Long id, Car car) {
-        Optional<Car> carFromDB = carRepository.findById(id);
-        if (!carFromDB.isEmpty()) {
-            Car existingCar = carFromDB.get();
-            existingCar.setModel(car.getModel());
-            existingCar.setColor(car.getColor());
-            existingCar.setPricePerDay(car.getPricePerDay());
-            carRepository.save(existingCar);
-        }
+    public void update(Car car) {
+        carRepository.save(car);
     }
 
     @Override

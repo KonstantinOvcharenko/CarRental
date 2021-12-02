@@ -15,8 +15,9 @@ public class RentalOrderServiceImpl implements RentalOrderService {
     private RentalOrderRepository rentalOrderRepository;
 
     @Override
-    public Optional<RentalOrder> findById(Long id) {
-        return rentalOrderRepository.findById(id);
+    public RentalOrder findById(Long id) {
+        Optional<RentalOrder> optionalRentalOrder = rentalOrderRepository.findById(id);
+        return optionalRentalOrder.isPresent() ? optionalRentalOrder.get() : new RentalOrder();
     }
 
     @Override
@@ -25,22 +26,14 @@ public class RentalOrderServiceImpl implements RentalOrderService {
     }
 
     @Override
-    public void save(RentalOrder rentalOrder) {
+    public RentalOrder save(RentalOrder rentalOrder) {
         rentalOrderRepository.save(rentalOrder);
+        return rentalOrder;
     }
 
     @Override
-    public void update(Long id, RentalOrder rentalOrder) {
-        Optional<RentalOrder> rentalOrderFromDB = rentalOrderRepository.findById(id);
-        if (!rentalOrderFromDB.isEmpty()) {
-            RentalOrder existingRentalOrder = rentalOrderFromDB.get();
-            existingRentalOrder.setUser(rentalOrder.getUser());
-            existingRentalOrder.setCar(rentalOrder.getCar());
-            existingRentalOrder.setStatus(rentalOrder.getStatus());
-            existingRentalOrder.setStartDate(rentalOrder.getStartDate());
-            existingRentalOrder.setEndDate(rentalOrder.getEndDate());
-            existingRentalOrder.setTotalPrice(rentalOrder.getTotalPrice());
-        }
+    public void update(RentalOrder rentalOrder) {
+        rentalOrderRepository.save(rentalOrder);
     }
 
     @Override
