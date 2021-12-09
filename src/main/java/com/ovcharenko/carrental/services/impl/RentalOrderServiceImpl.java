@@ -27,8 +27,7 @@ public class RentalOrderServiceImpl implements RentalOrderService {
 
     @Override
     public RentalOrder save(RentalOrder rentalOrder) {
-        rentalOrderRepository.save(rentalOrder);
-        return rentalOrder;
+        return rentalOrderRepository.save(rentalOrder);
     }
 
     @Override

@@ -7,14 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class RentalOrderServiceController {
     @Autowired
     private RentalOrderService rentalOrderService;
 
     @GetMapping("/orders")
-    public ResponseEntity<RentalOrder> getOrders() {
-        return new ResponseEntity(rentalOrderService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<RentalOrder>> getOrders() {
+        return new ResponseEntity<>(rentalOrderService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/order/{id}")
