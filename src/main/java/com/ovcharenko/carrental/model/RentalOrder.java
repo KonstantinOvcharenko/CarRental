@@ -1,5 +1,9 @@
 package com.ovcharenko.carrental.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,6 +12,10 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "RENTAL_ORDER")
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public class RentalOrder {
     @Id
     @GeneratedValue
@@ -16,12 +24,10 @@ public class RentalOrder {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
-    @Column(name = "user")
     private User user;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carId")
-    @Column(name = "car")
     private Car car;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -35,7 +41,6 @@ public class RentalOrder {
     @Column(name = "totalPrice")
     private BigDecimal totalPrice;
 
-    @Column
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "status")
     private Enum status;
 }

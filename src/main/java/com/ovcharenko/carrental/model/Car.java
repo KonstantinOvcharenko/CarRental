@@ -1,10 +1,19 @@
 package com.ovcharenko.carrental.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "CAR")
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public class Car {
     @Id
     @GeneratedValue
@@ -17,7 +26,6 @@ public class Car {
     @Column(name = "pricePerDay")
     private BigDecimal pricePerDay;
 
-    @Column
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "color")
     private Enum color;
 }
