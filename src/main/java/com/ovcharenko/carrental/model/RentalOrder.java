@@ -1,9 +1,7 @@
 package com.ovcharenko.carrental.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.ovcharenko.carrental.enums.Status;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,6 +14,8 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class RentalOrder {
     @Id
     @GeneratedValue
@@ -42,5 +42,5 @@ public class RentalOrder {
     private BigDecimal totalPrice;
 
     @Column(name = "status")
-    private Enum status;
+    private Status status;
 }
